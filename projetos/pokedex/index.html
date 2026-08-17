@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pokédex completa com todos os Pokémon, tipos, treinadores e simulador de batalhas.">
+  <meta name="theme-color" content="#CC0000">
+  <title>PokéDex — Enciclopédia Pokémon Completa</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23CC0000' stroke='%23111' stroke-width='4'/><rect x='2' y='46' width='96' height='8' fill='%23111'/><circle cx='50' cy='50' r='16' fill='white' stroke='%23111' stroke-width='4'/><circle cx='50' cy='50' r='7' fill='%23ddd' stroke='%23111' stroke-width='2'/></svg>">
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loader-pokeball"></div>
+    <p>Carregando Pokédex...</p>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Scroll to Top -->
+  <button id="scroll-top" title="Voltar ao topo">↑</button>
+
+  <!-- Easter Egg Pokébola flutuante -->
+  <div class="easter-egg" title="Tente o código Konami! ↑↑↓↓←→←→BA" onclick="showToast('Dica: ↑↑↓↓←→←→BA no teclado!')">
+    <svg viewBox="0 0 50 50" width="44" height="44">
+      <circle cx="25" cy="25" r="23" fill="#CC0000" stroke="#111" stroke-width="3"/>
+      <rect x="2" y="22" width="46" height="6" fill="#111"/>
+      <circle cx="25" cy="25" r="10" fill="white" stroke="#111" stroke-width="3"/>
+      <circle cx="25" cy="25" r="4" fill="#ddd"/>
+    </svg>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a class="nav-logo" href="index.html">
+      <svg viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" fill="white" stroke="white" stroke-width="1"/>
+        <path d="M1 20 Q1 1 20 1 Q39 1 39 20" fill="#CC0000"/>
+        <rect x="1" y="18" width="38" height="4" fill="#111"/>
+        <circle cx="20" cy="20" r="7" fill="white" stroke="#111" stroke-width="2.5"/>
+        <circle cx="20" cy="20" r="3" fill="#ddd"/>
+      </svg>
+      PokéDex
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Início</a>
+      <a href="pokedex.html">Pokédex</a>
+      <a href="tipos.html">Tipos</a>
+      <a href="treinadores.html">Treinadores</a>
+      <a href="batalhas.html">Batalhas</a>
+    </div>
+    <div class="nav-right">
+      <button class="btn-dark-toggle" title="Alternar tema">🌙</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="nav-mobile" id="nav-mobile">
+    <a href="index.html">🏠 Início</a>
+    <a href="pokedex.html">📖 Pokédex</a>
+    <a href="tipos.html">🔥 Tipos</a>
+    <a href="treinadores.html">🧢 Treinadores</a>
+    <a href="batalhas.html">⚔️ Batalhas</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div style="position:relative;z-index:1">
+      <div style="display:inline-block;background:rgba(255,255,255,.15);padding:6px 18px;border-radius:20px;font-size:.85rem;font-weight:600;margin-bottom:16px;letter-spacing:1px">
+        ✨ Geração 1 a 9 Completa
+      </div>
+      <h1 class="hero-title">A Pokédex<br>mais completa</h1>
+      <p class="hero-subtitle">
+        Explore todos os 1025 Pokémon, descubra fraquezas de tipos, 
+        conheça os treinadores lendários e simule batalhas épicas.
+      </p>
+      <div class="hero-btns">
+        <a href="pokedex.html" class="btn-hero primary">📖 Explorar Pokédex</a>
+        <a href="batalhas.html" class="btn-hero secondary">⚔️ Batalhar Agora</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-n">1025</div>
+          <div class="hero-stat-l">Pokémon</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-n">18</div>
+          <div class="hero-stat-l">Tipos</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-n">9</div>
+          <div class="hero-stat-l">Gerações</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-n">∞</div>
+          <div class="hero-stat-l">Aventuras</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED POKÉMON -->
+  <div class="page">
+    <div class="container">
+
+      <div class="section-header">
+        <div>
+          <div class="section-title">Pokémon em Destaque</div>
+          <div class="section-subtitle">Os mais amados de todas as gerações</div>
+        </div>
+        <a href="pokedex.html" style="color:var(--accent);font-weight:700;font-size:.9rem">Ver todos →</a>
+      </div>
+      <div class="pokemon-grid" id="featured-grid">
+        <div class="spinner"></div>
+      </div>
+
+      <!-- Seção Rápida -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:40px">
+
+        <!-- Histórico -->
+        <div class="card">
+          <div class="section-title" style="margin-bottom:14px;font-size:1.1rem">🕐 Recentes</div>
+          <div id="history-list" style="display:flex;flex-direction:column;gap:8px">
+            <p style="color:var(--text2);font-size:.88rem">Carregando...</p>
+          </div>
+        </div>
+
+        <!-- Favoritos -->
+        <div class="card">
+          <div class="section-title" style="margin-bottom:14px;font-size:1.1rem">⭐ Favoritos</div>
+          <div id="favs-list" style="display:flex;flex-direction:column;gap:8px">
+            <p style="color:var(--text2);font-size:.88rem">Carregando...</p>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="card">
+          <div class="section-title" style="margin-bottom:14px;font-size:1.1rem">⚡ Acesso Rápido</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <a href="tipos.html" style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;background:var(--surface2);font-weight:700;transition:.2s" onmouseover="this.style.background='var(--border)'" onmouseout="this.style.background='var(--surface2)'">🔥 Tabela de Tipos</a>
+            <a href="treinadores.html" style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;background:var(--surface2);font-weight:700;transition:.2s" onmouseover="this.style.background='var(--border)'" onmouseout="this.style.background='var(--surface2)'">🧢 Treinadores Famosos</a>
+            <a href="batalhas.html" style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;background:var(--surface2);font-weight:700;transition:.2s" onmouseover="this.style.background='var(--border)'" onmouseout="this.style.background='var(--surface2)'">⚔️ Simulador de Batalhas</a>
+            <a href="pokedex.html?gen=1" style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;background:var(--surface2);font-weight:700;transition:.2s" onmouseover="this.style.background='var(--border)'" onmouseout="this.style.background='var(--surface2)'">🌟 Pokémon de Kanto (Gen 1)</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quiz & Curiosidades Prévia -->
+      <div style="margin-top:40px">
+        <div class="section-header">
+          <div>
+            <div class="section-title">🧠 Quiz Pokémon</div>
+            <div class="section-subtitle">Teste seus conhecimentos</div>
+          </div>
+          <a href="batalhas.html#quiz" style="color:var(--accent);font-weight:700;font-size:.9rem">Jogar →</a>
+        </div>
+
+        <div style="background:linear-gradient(135deg,var(--red),var(--red-dark));border-radius:16px;padding:28px;color:#fff;text-align:center">
+          <div style="font-size:2.5rem;margin-bottom:8px">🎮</div>
+          <div style="font-size:1.2rem;font-weight:900;margin-bottom:8px">Você é um verdadeiro Mestre Pokémon?</div>
+          <p style="opacity:.85;margin-bottom:20px">10 perguntas para testar tudo que você sabe sobre o universo Pokémon!</p>
+          <a href="batalhas.html#quiz" class="btn-hero primary">Iniciar Quiz</a>
+        </div>
+      </div>
+
+<div style="margin-top:40px">
+  <div class="section-header">
+    <div class="section-title">📅 Gerações</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px">
+
+    <a href="pokedex.html?gen=1"
+       style="background:#EF4444;color:#fff;border-radius:12px;padding:14px 10px;text-align:center;transition:.2s;display:block"
+       onmouseover="this.style.transform='translateY(-3px)'"
+       onmouseout="this.style.transform='none'">
+      <div style="font-size:1.3rem;font-weight:900">Gen 1</div>
+      <div style="font-size:.78rem;opacity:.85">Kanto</div>
+      <div style="font-size:.7rem;opacity:.7;margin-top:2px">#001-151</div>
+    </a>
+
+    <a href="pokedex.html?gen=2"
+       style="background:#F59E0B;color:#fff;border-radius:12px;padding:14px 10px;text-align:center;transition:.2s;display:block"
+       onmouseover="this.style.transform='translateY(-3px)'"
+       onmouseout="this.style.transform='none'">
+      <div style="font-size:1.3rem;font-weight:900">Gen 2</div>
+      <div style="font-size:.78rem;opacity:.85">Johto</div>
+      <div style="font-size:.7rem;opacity:.7;margin-top:2px">#152-251</div>
+    </a>
+
+    <a href="pokedex.html?gen=3"
+       style="background:#10B981;color:#fff;border-radius:12px;padding:14px 10px;text-align:center;transition:.2s;display:block"
+       onmouseover="this.style.transform='translateY(-3px)'"
+       onmouseout="this.style.transform='none'">
+      <div style="font-size:1.3rem;font-weight:900">Gen 3</div>
+      <div style="font-size:.78rem;opacity:.85">Hoenn</div>
+      <div style="font-size:.7rem;opacity:.7;margin-top:2px">#252-386</div>
+    </a>
+
+    <a href="pokedex.html?gen=4"
+       style="background:#3B82F6;color:#fff;border-radius:12px;padding:14px 10px;text-align:center;transition:.2s;display:block"
+       onmouseover="this.style.transform='translateY(-3px)'"
+       onmouseout="this.style.transform='none'">
+      <div style="font-size:1.3rem;font-weight:900">Gen 4</div>
+      <div style="font-size:.78rem;opacity:.85">Sinnoh</div>
+      <div style="font-size:.7rem;opacity:.7;margin-top:2px">#387-493</div>
+    </a>
+
+    <a href="pokedex.html?gen=5"
+       style="background:#6B7280;color:#fff;border-radius:12px;padding:14px 10px;text-align:center;transition:.2s;display:block"
+       onmouseover="this.style.transform='translateY(-3px)'"
+       onmouseout="this.style.transform='none'">
+      <div style="font-size:1.3rem;font-weight:900">Gen 5</div>
+      <div style="font-size:.78rem;opacity:.85">Unova</div>
+      <div style="font-size:.7rem;opacity:.7;margin-top:2px">#494-649</div>
+    </a>
+
+    <a href="pokedex.html?gen=6"
+       style="background:#8B5CF6;color:#fff;border-radius:12px;padding:14px 10px;text-align:center;transition:.2s;display:block"
+       onmouseover="this.style.transform='translateY(-3px)'"
+       onmouseout="this.style.transform='none'">
+      <div style="font-size:1.3rem;font-weight:900">Gen 6</div>
+      <div style="font-size:.78rem;opacity:.85">Kalos</div>
+      <div style="font-size:.7rem;opacity:.7;margin-top:2px">#650-721</div>
+    </a>
+
+    <a href="pokedex.html?gen=7"
+       style="background:#F97316;color:#fff;border-radius:12px;padding:14px 10px;text-align:center;transition:.2s;display:block"
+       onmouseover="this.style.transform='translateY(-3px)'"
+       onmouseout="this.style.transform='none'">
+      <div style="font-size:1.3rem;font-weight:900">Gen 7</div>
+      <div style="font-size:.78rem;opacity:.85">Alola</div>
+      <div style="font-size:.7rem;opacity:.7;margin-top:2px">#722-809</div>
+    </a>
+
+    <a href="pokedex.html?gen=8"
+       style="background:#06B6D4;color:#fff;border-radius:12px;padding:14px 10px;text-align:center;transition:.2s;display:block"
+       onmouseover="this.style.transform='translateY(-3px)'"
+       onmouseout="this.style.transform='none'">
+      <div style="font-size:1.3rem;font-weight:900">Gen 8</div>
+      <div style="font-size:.78rem;opacity:.85">Galar</div>
+      <div style="font-size:.7rem;opacity:.7;margin-top:2px">#810-905</div>
+    </a>
+
+    <a href="pokedex.html?gen=9"
+       style="background:#EC4899;color:#fff;border-radius:12px;padding:14px 10px;text-align:center;transition:.2s;display:block"
+       onmouseover="this.style.transform='translateY(-3px)'"
+       onmouseout="this.style.transform='none'">
+      <div style="font-size:1.3rem;font-weight:900">Gen 9</div>
+      <div style="font-size:.78rem;opacity:.85">Paldea</div>
+      <div style="font-size:.7rem;opacity:.7;margin-top:2px">#906-1025</div>
+    </a>
+
+  </div>
+</div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">⚫ PokéDex</div>
+    <div class="footer-links">
+      <a href="pokedex.html">Pokédex</a>
+      <a href="tipos.html">Tipos</a>
+      <a href="treinadores.html">Treinadores</a>
+      <a href="batalhas.html">Batalhas</a>
+      <a href="https://pokeapi.co" target="_blank" rel="noopener">PokéAPI</a>
+    </div>
+    <p class="footer-copy">Dados fornecidos por <a href="https://pokeapi.co" target="_blank" style="color:rgba(255,255,255,.7)">PokéAPI</a>. Pokémon é propriedade de Nintendo/Game Freak/Creatures. Este é um projeto de fã sem fins lucrativos.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto | Portfólio - Danilo de Andrade</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .projeto-viewer {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--industrial-light);
+        }
+
+        .viewer-bar {
+            background: var(--industrial-dark);
+            color: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 4px solid var(--senai-red);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .viewer-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .viewer-bar-left .logo-mark {
+            width: 36px;
+            height: 36px;
+            font-size: 0.85rem;
+        }
+
+        .viewer-info {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .viewer-info .vi-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .viewer-info .vi-sub {
+            font-size: 0.75rem;
+            color: var(--gray-300);
+            font-family: var(--font-code);
+        }
+
+        .viewer-bar-right {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+        }
+
+        .btn-viewer {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.55rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-base);
+        }
+
+        .btn-viewer.primary {
+            background: var(--senai-red);
+            color: var(--white);
+        }
+
+        .btn-viewer.primary:hover {
+            background: var(--senai-red-dark);
+        }
+
+        .btn-viewer.ghost {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-viewer.ghost:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .viewer-frame-wrap {
+            flex: 1;
+            position: relative;
+            background: var(--white);
+        }
+
+        .viewer-frame-wrap iframe {
+            width: 100%;
+            height: calc(100vh - 80px);
+            border: none;
+            display: block;
+        }
+
+        .viewer-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--text-light);
+            font-family: var(--font-code);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="projeto-viewer">
+        <div class="viewer-bar">
+            <div class="viewer-bar-left">
+                <a href="index.html" class="logo-mark" title="Voltar ao portfólio" style="text-decoration:none; line-height: 36px; text-align:center;">DS</a>
+                <div class="viewer-info">
+                    <span class="vi-title" id="vi-title">Carregando projeto…</span>
+                    <span class="vi-sub" id="vi-sub">// portfolio.danilo</span>
+                </div>
+            </div>
+            <div class="viewer-bar-right">
+                <a href="index.html#projetos" class="btn-viewer ghost">← Voltar</a>
+                <a id="vi-github" href="#" target="_blank" rel="noopener" class="btn-viewer ghost">GitHub</a>
+                <button id="vi-fullscreen" class="btn-viewer primary">Abrir em tela cheia</button>
+            </div>
+        </div>
+        <div class="viewer-frame-wrap">
+            <div class="viewer-loading" id="vi-loading">Carregando…</div>
+            <iframe id="vi-frame" src="" title="Projeto"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Catálogo de projetos embutidos
+        const PROJETOS = {
+            calculadora: {
+                titulo: 'Calculadora',
+                sub: 'HTML • CSS • JavaScript',
+                arquivo: 'projetos/calculadora/calculadora.html',
+                github: 'https://github.com/danxy777-dev/calculadora'
+            },
+            petshop: {
+                titulo: 'Boo Pet Shop',
+                sub: 'HTML • CSS',
+                arquivo: 'projetos/petshop/Boo.html',
+                github: 'https://github.com/danxy777-dev/Pet-Shop'
+            },
+            pokedex: {
+                titulo: 'PokéDex',
+                sub: 'HTML • CSS • JavaScript',
+                arquivo: 'projetos/pokedex/pokedex.html',
+                github: 'https://github.com/danxy777-dev/pokedex-web'
+            },
+            academia: {
+                titulo: 'Academia do Bairro',
+                sub: 'HTML • CSS • JavaScript',
+                arquivo: 'projetos/academia-do-bairro/index.html',
+                github: 'https://github.com/danxy777-dev/academia-do-bairro'
+            }
+        };
+
+        // Lê ?p=nome da URL
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get('p');
+        const projeto = PROJETOS[slug];
+
+        if (projeto) {
+            document.getElementById('vi-title').textContent = projeto.titulo;
+            document.getElementById('vi-sub').textContent = '// ' + projeto.sub;
+            document.getElementById('vi-frame').src = projeto.arquivo;
+            document.getElementById('vi-github').href = projeto.github;
+            document.title = projeto.titulo + ' | Portfólio - Danilo de Andrade';
+
+            document.getElementById('vi-frame').addEventListener('load', () => {
+                document.getElementById('vi-loading').style.display = 'none';
+            });
+
+            document.getElementById('vi-fullscreen').addEventListener('click', () => {
+                window.open(projeto.arquivo, '_blank');
+            });
+        } else {
+            document.getElementById('vi-title').textContent = 'Projeto não encontrado';
+            document.getElementById('vi-sub').textContent = '// 404';
+            document.getElementById('vi-loading').textContent = 'Projeto não encontrado. Volte ao portfólio.';
+            document.getElementById('vi-github').style.display = 'none';
+            document.getElementById('vi-fullscreen').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
