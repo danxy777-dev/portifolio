@@ -75,7 +75,46 @@ if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
 }
 
-// 6) Console — easter egg técnico
+// 6) Dark Theme — alterna e persiste
+(function themeToggle() {
+    const STORAGE_KEY = 'portfolio-theme';
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+
+    // Resolve tema: 1) salvo, 2) preferência do sistema, 3) claro
+    const saved = localStorage.getItem(STORAGE_KEY);
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initial = saved || (prefersDark ? 'dark' : 'light');
+
+    const icon = btn.querySelector('.theme-icon');
+
+    function apply(theme) {
+        document.body.classList.toggle('dark', theme === 'dark');
+        if (icon) icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+        btn.setAttribute(
+            'title',
+            theme === 'dark' ? 'Tema escuro (clique para claro)' : 'Tema claro (clique para escuro)'
+        );
+    }
+
+    apply(initial);
+
+    btn.addEventListener('click', () => {
+        const next = document.body.classList.contains('dark') ? 'light' : 'dark';
+        apply(next);
+        try { localStorage.setItem(STORAGE_KEY, next); } catch (_) {}
+    });
+
+    // Reage se o usuário mudar a preferência do sistema (só se nunca escolheu manualmente)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem(STORAGE_KEY)) {
+            apply(e.matches ? 'dark' : 'light');
+        }
+    });
+})();
+
+// 7) Console — easter egg técnico
 console.log(
     '%c🎓 Portfólio SENAI — Desenvolvimento de Sistemas',
     'color: #DA291C; font-size: 16px; font-weight: bold;'
