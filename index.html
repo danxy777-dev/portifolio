@@ -7,88 +7,200 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Faixa superior SENAI -->
+    <!-- Palco de Iluminação Ambiente para Refração do Liquid Glass -->
+    <div class="ambient-canvas" aria-hidden="true">
+        <div class="ambient-orb orb-blue"></div>
+        <div class="ambient-orb orb-cyan"></div>
+        <div class="ambient-orb orb-indigo"></div>
+        <div class="ambient-orb orb-violet"></div>
+        <div class="ambient-orb orb-sky"></div>
+    </div>
+
+    <!-- Faixa superior SENAI — Balão Cápsula Flutuante -->
     <div class="top-bar">
-        <div class="container top-bar-content">
-            <span class="top-bar-item"> Técnico em Desenvolvimento de Sistemas</span>
-            <span class="top-bar-item"> SENAI - 2º Ano (2º Semestre)</span>
+        <div class="container top-bar-wrap">
+            <div class="top-bar-content glass-pill">
+                <span class="top-bar-item">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                    Técnico em Desenvolvimento de Sistemas
+                </span>
+                <span class="top-bar-divider" aria-hidden="true">•</span>
+                <span class="top-bar-item">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    SENAI - 2º Ano (2º Semestre)
+                </span>
+            </div>
         </div>
     </div>
 
-    <!-- Cabeçalho / Navegação -->
+    <!-- Cabeçalho / Navegação — Dock Flutuante Liquid Glass -->
     <header class="header">
-        <nav class="nav container">
-            <a href="#inicio" class="logo">
-                <span class="logo-mark">DS</span>
-                <span class="logo-text">
-                    <span class="logo-name">Danilo de Andrade</span>
-                    <span class="logo-role">Desenvolvedor em Formação</span>
-                </span>
-            </a>
-            <ul class="nav-list">
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#habilidades">Tecnologias</a></li>
-                <li><a href="#projetos">Projetos</a></li>
-                <li><a href="#certificados">Certificados</a></li>
-                <li><a href="#aprendizado">Jornada</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
-                <span></span><span></span><span></span>
-            </button>
-        </nav>
+        <div class="container header-shell">
+            <nav class="nav glass-nav-dock" aria-label="Navegação principal">
+                <a href="#inicio" class="logo">
+                    <span class="logo-mark">DS</span>
+                    <span class="logo-text">
+                        <span class="logo-name">Danilo de Andrade</span>
+                        <span class="logo-role">Desenvolvedor em Formação</span>
+                    </span>
+                </a>
+                <ul class="nav-list" id="nav-list">
+                    <li><a href="#inicio" class="active">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#habilidades">Tecnologias</a></li>
+                    <li><a href="#projetos">Projetos</a></li>
+                    <li><a href="#certificados">Certificados</a></li>
+                    <li><a href="#aprendizado">Jornada</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-list">
+                    <span></span><span></span><span></span>
+                </button>
+            </nav>
+        </div>
     </header>
 
     <!-- Seção Hero / Início -->
     <section id="inicio" class="hero">
-        <div class="container hero-content">
-            <div class="hero-badge">
-                <span class="badge-dot"></span>
-                Disponível para estágio em TI
-            </div>
-            <p class="hero-greeting">// Olá, eu sou</p>
-            <h1 class="hero-name">Danilo de Andrade</h1>
-            <h2 class="hero-title">Estudante de Desenvolvimento de Sistemas no SENAI</h2>
-            <p class="hero-description">
-             <strong>2 anos do curso técnico</strong>, no 2º semestre do 2º ano,
-                transformando aulas em código e código em soluções. Em constante
-                aprendizado, criando projetos que unem lógica, design e funcionalidade.
-            </p>
-            <div class="hero-buttons">
-                <a href="#projetos" class="btn btn-primary">Ver Projetos</a>
-                <a href="#contato" class="btn btn-secondary">Falar Comigo</a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-num">2</span>
-                    <span class="stat-label">Anos de curso</span>
+        <div class="container hero-layout">
+            <div class="hero-content">
+                <div class="hero-badge glass-balloon-pill">
+                    <span class="badge-dot"></span>
+                    <span>Disponível para estágio em TI</span>
                 </div>
-                <div class="stat">
-                    <span class="stat-num">10+</span>
-                    <span class="stat-label">Projetos feitos</span>
+                <p class="hero-greeting">// Olá, eu sou</p>
+                <h1 class="hero-name">Danilo de Andrade</h1>
+                <h2 class="hero-title">Estudante de Desenvolvimento de Sistemas no SENAI</h2>
+                <p class="hero-description">
+                    <strong>2 anos do curso técnico</strong>, no 2º semestre do 2º ano,
+                    transformando aulas em código e código em soluções. Em constante
+                    aprendizado, criando projetos que unem lógica, design e funcionalidade.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projetos" class="btn btn-primary glass-interactive">
+                        <span>Ver Projetos</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                    <a href="#contato" class="btn btn-secondary glass-interactive">
+                        <span>Falar Comigo</span>
+                    </a>
                 </div>
-                <div class="stat">
-                    <span class="stat-num">7+</span>
-                    <span class="stat-label">Tecnologias</span>
+                <div class="hero-stats">
+                    <div class="stat glass-stat-balloon glass-interactive">
+                        <span class="stat-num">2</span>
+                        <span class="stat-label">Anos de curso</span>
+                    </div>
+                    <div class="stat glass-stat-balloon glass-interactive">
+                        <span class="stat-num">10+</span>
+                        <span class="stat-label">Projetos feitos</span>
+                    </div>
+                    <div class="stat glass-stat-balloon glass-interactive">
+                        <span class="stat-num">7+</span>
+                        <span class="stat-label">Tecnologias</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Palco Visual de Balões e Camadas Liquid Glass -->
+            <div class="hero-glass-stage" aria-hidden="true">
+                <!-- Esferas refrativas de vidro puro -->
+                <div class="glass-sphere sphere-lg"></div>
+                <div class="glass-sphere sphere-md"></div>
+                <div class="glass-sphere sphere-sm"></div>
+
+                <!-- Painel Central de Vidro Líquido -->
+                <div class="glass-prism-card glass-interactive">
+                    <div class="prism-window-bar">
+                        <div class="prism-dots">
+                            <span class="p-dot p-dot-close"></span>
+                            <span class="p-dot p-dot-min"></span>
+                            <span class="p-dot p-dot-max"></span>
+                        </div>
+                        <span class="prism-window-title">danilo.portfolio — SENAI-SP</span>
+                        <span class="prism-window-pill">2º Semestre</span>
+                    </div>
+                    <div class="prism-body">
+                        <div class="prism-code-line">
+                            <span class="c-kw">const</span> <span class="c-var">desenvolvedor</span> = {
+                        </div>
+                        <div class="prism-code-line indent">
+                            <span class="c-prop">nome</span>: <span class="c-str">"Danilo de Andrade"</span>,
+                        </div>
+                        <div class="prism-code-line indent">
+                            <span class="c-prop">formacao</span>: <span class="c-str">"Técnico em DS • SENAI"</span>,
+                        </div>
+                        <div class="prism-code-line indent">
+                            <span class="c-prop">foco</span>: [<span class="c-str">"Web"</span>, <span class="c-str">"Back-end"</span>, <span class="c-str">"UI/UX"</span>],
+                        </div>
+                        <div class="prism-code-line indent">
+                            <span class="c-prop">status</span>: <span class="c-bool">"Aberto a Estágio"</span>
+                        </div>
+                        <div class="prism-code-line">};</div>
+
+                        <div class="prism-metrics-row">
+                            <div class="prism-mini-chip">
+                                <span class="mini-chip-dot"></span>
+                                <span>4 Projetos Web</span>
+                            </div>
+                            <div class="prism-mini-chip">
+                                <span class="mini-chip-dot blue"></span>
+                                <span>11 Certificações</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Balões Flutuantes de Vidro Translúcido sobrepostos -->
+                <div class="glass-floating-balloon balloon-top-left glass-interactive">
+                    <span class="balloon-orb orb-accent-blue">&lt;/&gt;</span>
+                    <div class="balloon-meta">
+                        <span class="balloon-title">Front-end &amp; UI</span>
+                        <span class="balloon-sub">HTML5 • CSS3 • JS</span>
+                    </div>
+                </div>
+
+                <div class="glass-floating-balloon balloon-top-right glass-interactive">
+                    <span class="balloon-orb orb-accent-indigo">{ }</span>
+                    <div class="balloon-meta">
+                        <span class="balloon-title">Back-end &amp; Dados</span>
+                        <span class="balloon-sub">PHP • MySQL • SQL</span>
+                    </div>
+                </div>
+
+                <div class="glass-floating-balloon balloon-bottom-left glass-interactive">
+                    <span class="balloon-orb orb-accent-cyan">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+                    </span>
+                    <div class="balloon-meta">
+                        <span class="balloon-title">11 Certificados</span>
+                        <span class="balloon-sub">SENAI Roberto Simonsen</span>
+                    </div>
+                </div>
+
+                <div class="glass-floating-balloon balloon-bottom-right glass-interactive">
+                    <span class="balloon-orb orb-accent-teal">git</span>
+                    <div class="balloon-meta">
+                        <span class="balloon-title">Versionamento</span>
+                        <span class="balloon-sub">Git • GitHub • Figma</span>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="hero-bg"></div>
+        <div class="hero-bg" aria-hidden="true"></div>
     </section>
 
     <!-- Seção Sobre Mim -->
     <section id="sobre" class="section sobre">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">SOBRE MIM</span>
+                <span class="section-tag glass-balloon-pill">SOBRE MIM</span>
                 <h2 class="section-title">Quem está por trás do código</h2>
             </div>
             <div class="sobre-grid">
-                <div class="sobre-texto">
+                <div class="sobre-texto glass-panel glass-interactive">
                     <p>
                         Sou estudante do <strong>2º ano do Ensino Médio</strong>, cursando
                         <strong>Técnico em Desenvolvimento de Sistemas no SENAI</strong>.
@@ -107,29 +219,37 @@
                     </p>
                 </div>
                 <div class="sobre-info">
-                    <div class="info-card">
-                        <span class="info-icon"></span>
+                    <div class="info-card glass-interactive">
+                        <span class="info-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                        </span>
                         <div>
                             <span class="info-label">Formação</span>
                             <span class="info-valor">Ensino Médio + Técnico em DS</span>
                         </div>
                     </div>
-                    <div class="info-card">
-                        <span class="info-icon"></span>
+                    <div class="info-card glass-interactive">
+                        <span class="info-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
+                        </span>
                         <div>
                             <span class="info-label">Instituição</span>
                             <span class="info-valor">SENAI</span>
                         </div>
                     </div>
-                    <div class="info-card">
-                        <span class="info-icon"></span>
+                    <div class="info-card glass-interactive">
+                        <span class="info-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        </span>
                         <div>
                             <span class="info-label">Período</span>
                             <span class="info-valor">2º Ano (2º Semestre)</span>
                         </div>
                     </div>
-                    <div class="info-card">
-                        <span class="info-icon"></span>
+                    <div class="info-card glass-interactive">
+                        <span class="info-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                        </span>
                         <div>
                             <span class="info-label">Objetivo</span>
                             <span class="info-valor">Estágio em Desenvolvimento</span>
@@ -144,24 +264,30 @@
     <section id="habilidades" class="section habilidades">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">TECNOLOGIAS</span>
+                <span class="section-tag glass-balloon-pill">TECNOLOGIAS</span>
                 <h2 class="section-title">O que estou aprendendo no SENAI</h2>
                 <p class="section-subtitle">Ferramentas e linguagens que fazem parte da minha formação técnica</p>
             </div>
             <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon-wrap">
-                        <span class="skill-icon-html">&lt;/&gt;</span>
+                <div class="skill-card glass-interactive">
+                    <div class="skill-card-top">
+                        <div class="skill-icon-wrap">
+                            <span class="skill-icon-html">&lt;/&gt;</span>
+                        </div>
+                        <span class="skill-pct-balloon">85%</span>
                     </div>
-                    <h3>HTML5 & CSS3</h3>
+                    <h3>HTML5 &amp; CSS3</h3>
                     <p>Marcação semântica, layouts responsivos com Flexbox e Grid, animações.</p>
                     <div class="skill-bar">
                         <div class="skill-progress" style="--w: 85%"></div>
                     </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon-wrap">
-                        <span class="skill-icon-js">{ }</span>
+                <div class="skill-card glass-interactive">
+                    <div class="skill-card-top">
+                        <div class="skill-icon-wrap">
+                            <span class="skill-icon-js">{ }</span>
+                        </div>
+                        <span class="skill-pct-balloon">70%</span>
                     </div>
                     <h3>JavaScript</h3>
                     <p>Lógica de programação, manipulação do DOM, eventos e fetch API.</p>
@@ -169,9 +295,12 @@
                         <div class="skill-progress" style="--w: 70%"></div>
                     </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon-wrap">
-                        <span class="skill-icon-php">&lt;?php</span>
+                <div class="skill-card glass-interactive">
+                    <div class="skill-card-top">
+                        <div class="skill-icon-wrap">
+                            <span class="skill-icon-php">&lt;?php</span>
+                        </div>
+                        <span class="skill-pct-balloon">65%</span>
                     </div>
                     <h3>PHP</h3>
                     <p>Back-end, integração com banco de dados, formulários e sessões.</p>
@@ -179,9 +308,14 @@
                         <div class="skill-progress" style="--w: 65%"></div>
                     </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon-wrap">
-                        <span class="skill-icon-db"></span>
+                <div class="skill-card glass-interactive">
+                    <div class="skill-card-top">
+                        <div class="skill-icon-wrap">
+                            <span class="skill-icon-db" aria-hidden="true">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>
+                            </span>
+                        </div>
+                        <span class="skill-pct-balloon">70%</span>
                     </div>
                     <h3>MySQL / SQL</h3>
                     <p>Modelagem de dados, criação de tabelas, consultas e joins.</p>
@@ -189,21 +323,29 @@
                         <div class="skill-progress" style="--w: 70%"></div>
                     </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon-wrap">
-                        <span class="skill-icon-git">git</span>
+                <div class="skill-card glass-interactive">
+                    <div class="skill-card-top">
+                        <div class="skill-icon-wrap">
+                            <span class="skill-icon-git">git</span>
+                        </div>
+                        <span class="skill-pct-balloon">75%</span>
                     </div>
-                    <h3>Git & GitHub</h3>
+                    <h3>Git &amp; GitHub</h3>
                     <p>Versionamento, branches, commits semânticos e pull requests.</p>
                     <div class="skill-bar">
                         <div class="skill-progress" style="--w: 75%"></div>
                     </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon-wrap">
-                        <span class="skill-icon-ux"></span>
+                <div class="skill-card glass-interactive">
+                    <div class="skill-card-top">
+                        <div class="skill-icon-wrap">
+                            <span class="skill-icon-ux" aria-hidden="true">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                            </span>
+                        </div>
+                        <span class="skill-pct-balloon">60%</span>
                     </div>
-                    <h3>UI/UX & Figma</h3>
+                    <h3>UI/UX &amp; Figma</h3>
                     <p>Princípios de design, prototipagem de interfaces e experiência do usuário.</p>
                     <div class="skill-bar">
                         <div class="skill-progress" style="--w: 60%"></div>
@@ -217,15 +359,19 @@
     <section id="projetos" class="section projetos">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">PROJETOS</span>
+                <span class="section-tag glass-balloon-pill">PROJETOS</span>
                 <h2 class="section-title">Trabalhos do curso</h2>
                 <p class="section-subtitle">Projetos desenvolvidos durante o curso técnico no SENAI</p>
             </div>
             <div class="projetos-grid">
-                <article class="projeto-card">
+                <article class="projeto-card glass-interactive">
                     <a href="projeto.html?p=calculadora" class="projeto-imagem projeto-imagem-1" style="background-image: url('projetos/calculadora/preview.webp');">
+                        <img src="projetos/calculadora/preview.webp" alt="Calculadora moderna sobre mesa minimalista com notebook e gráficos representando o projeto Calculadora em HTML, CSS e JS" width="1200" height="750" loading="lazy" decoding="async" class="projeto-cover-img">
                         <div class="projeto-overlay">
                             <span class="projeto-tag">Web • Calculadora</span>
+                        </div>
+                        <div class="projeto-glass-Quick">
+                            <span>Abrir Preview Interativo ↗</span>
                         </div>
                     </a>
                     <div class="projeto-info">
@@ -235,16 +381,20 @@
                             <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
                         </div>
                         <div class="projeto-links">
-                            <a href="projeto.html?p=calculadora">Ver projeto →</a>
-                            <a href="https://github.com/danxy777-dev/calculadora" target="_blank" rel="noopener">GitHub →</a>
+                            <a href="projeto.html?p=calculadora" class="glass-link-balloon">Ver projeto →</a>
+                            <a href="https://github.com/danxy777-dev/calculadora" target="_blank" rel="noopener" class="glass-link-balloon secondary">GitHub →</a>
                         </div>
                     </div>
                 </article>
 
-                <article class="projeto-card">
+                <article class="projeto-card glass-interactive">
                     <a href="projeto.html?p=petshop" class="projeto-imagem projeto-imagem-2" style="background-image: url('projetos/petshop/preview.webp');">
+                        <img src="projetos/petshop/preview.webp" alt="Retrato profissional de estúdio de filhote canino vestindo moletom amarelo em fundo azul representando o projeto Boo Pet Shop" width="1200" height="750" loading="lazy" decoding="async" class="projeto-cover-img">
                         <div class="projeto-overlay">
                             <span class="projeto-tag">Web • E-commerce</span>
+                        </div>
+                        <div class="projeto-glass-Quick">
+                            <span>Abrir Preview Interativo ↗</span>
                         </div>
                     </a>
                     <div class="projeto-info">
@@ -254,16 +404,20 @@
                             <span>HTML5</span><span>CSS3</span>
                         </div>
                         <div class="projeto-links">
-                            <a href="projeto.html?p=petshop">Ver projeto →</a>
-                            <a href="https://github.com/danxy777-dev/Pet-Shop" target="_blank" rel="noopener">GitHub →</a>
+                            <a href="projeto.html?p=petshop" class="glass-link-balloon">Ver projeto →</a>
+                            <a href="https://github.com/danxy777-dev/Pet-Shop" target="_blank" rel="noopener" class="glass-link-balloon secondary">GitHub →</a>
                         </div>
                     </div>
                 </article>
 
-                <article class="projeto-card">
+                <article class="projeto-card glass-interactive">
                     <a href="projeto.html?p=pokedex" class="projeto-imagem projeto-imagem-3" style="background-image: url('projetos/pokedex/preview.webp');">
+                        <img src="projetos/pokedex/preview.webp" alt="Pokébola iluminada ao centro cercada por console Nintendo Switch, controles e miniaturas de Pokémon representando o projeto PokéDex" width="1200" height="750" loading="lazy" decoding="async" class="projeto-cover-img">
                         <div class="projeto-overlay">
                             <span class="projeto-tag">Web • Multi-página</span>
+                        </div>
+                        <div class="projeto-glass-Quick">
+                            <span>Abrir Preview Interativo ↗</span>
                         </div>
                     </a>
                     <div class="projeto-info">
@@ -273,16 +427,20 @@
                             <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
                         </div>
                         <div class="projeto-links">
-                            <a href="projeto.html?p=pokedex">Ver projeto →</a>
-                            <a href="https://github.com/danxy777-dev/pokedex-web" target="_blank" rel="noopener">GitHub →</a>
+                            <a href="projeto.html?p=pokedex" class="glass-link-balloon">Ver projeto →</a>
+                            <a href="https://github.com/danxy777-dev/pokedex-web" target="_blank" rel="noopener" class="glass-link-balloon secondary">GitHub →</a>
                         </div>
                     </div>
                 </article>
 
-                <article class="projeto-card">
+                <article class="projeto-card glass-interactive">
                     <a href="projeto.html?p=academia" class="projeto-imagem projeto-imagem-4" style="background-image: url('projetos/academia-do-bairro/preview.webp');">
+                        <img src="projetos/academia-do-bairro/preview.webp" alt="Ambiente moderno de academia com fileira de halteres cromados e equipamentos de musculação representando o projeto Academia do Bairro" width="1200" height="750" loading="lazy" decoding="async" class="projeto-cover-img">
                         <div class="projeto-overlay">
                             <span class="projeto-tag">Web • Site Institucional</span>
+                        </div>
+                        <div class="projeto-glass-Quick">
+                            <span>Abrir Preview Interativo ↗</span>
                         </div>
                     </a>
                     <div class="projeto-info">
@@ -292,13 +450,12 @@
                             <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
                         </div>
                         <div class="projeto-links">
-                            <a href="projeto.html?p=academia">Ver projeto →</a>
-                            <a href="https://github.com/danxy777-dev/academia-do-bairro" target="_blank" rel="noopener">GitHub →</a>
+                            <a href="projeto.html?p=academia" class="glass-link-balloon">Ver projeto →</a>
+                            <a href="https://github.com/danxy777-dev/academia-do-bairro" target="_blank" rel="noopener" class="glass-link-balloon secondary">GitHub →</a>
                         </div>
                     </div>
                 </article>
-
-                            </div>
+            </div>
         </div>
     </section>
 
@@ -306,8 +463,8 @@
     <section id="certificados" class="section certificados">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">CERTIFICAÇÕES</span>
-                <h2 class="section-title">Certificados & Qualificações</h2>
+                <span class="section-tag glass-balloon-pill">CERTIFICAÇÕES</span>
+                <h2 class="section-title">Certificados &amp; Qualificações</h2>
                 <p class="section-subtitle">Capacitações técnicas, cursos complementares e certificações emitidas pelo SENAI-SP</p>
             </div>
 
@@ -324,18 +481,17 @@
     </section>
 
     <!-- Seção Aprendizado / Linha do Tempo -->
-
     <section id="aprendizado" class="section aprendizado">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">JORNADA</span>
+                <span class="section-tag glass-balloon-pill">JORNADA</span>
                 <h2 class="section-title">Minha trajetória no SENAI</h2>
                 <p class="section-subtitle">A evolução do meu aprendizado técnico</p>
             </div>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-marker timeline-marker-active">4</div>
-                    <div class="timeline-content timeline-content-active">
+                    <div class="timeline-content timeline-content-active glass-interactive">
                         <span class="timeline-ano">2026 — 2º Ano (2º Semestre) — Atual</span>
                         <h3>Aprofundando e Preparando o TCC</h3>
                         <p>Frameworks, APIs, integração entre sistemas e início dos estudos para o TCC. Foco em evoluir para o mercado de TI.</p>
@@ -346,7 +502,7 @@
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-marker">3</div>
-                    <div class="timeline-content">
+                    <div class="timeline-content glass-interactive">
                         <span class="timeline-ano">2026 — 2º Ano (1º Semestre)</span>
                         <h3>Back-end e Banco de Dados</h3>
                         <p>PHP e MySQL. Criação de sistemas completos com cadastro, consulta e persistência de dados. Git e versionamento de código.</p>
@@ -357,7 +513,7 @@
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-marker">2</div>
-                    <div class="timeline-content">
+                    <div class="timeline-content glass-interactive">
                         <span class="timeline-ano">2025 — 1º Ano (2º Semestre)</span>
                         <h3>Primeiros Códigos e Projetos</h3>
                         <p>HTML, CSS e JavaScript na prática. Primeiros sites e programas rodando. Noção de como a web funciona de verdade.</p>
@@ -368,7 +524,7 @@
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-marker">1</div>
-                    <div class="timeline-content">
+                    <div class="timeline-content glass-interactive">
                         <span class="timeline-ano">2025 — 1º Ano (1º Semestre)</span>
                         <h3>Início da Jornada</h3>
                         <p>Primeiro contato com lógica de programação, algoritmos e a estrutura do curso técnico. Adaptação à rotina e ao ritmo do SENAI.</p>
@@ -385,25 +541,34 @@
     <section id="contato" class="section contato">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">CONTATO</span>
+                <span class="section-tag glass-balloon-pill">CONTATO</span>
                 <h2 class="section-title">Vamos conversar?</h2>
                 <p class="section-subtitle">Aberto a oportunidades de estágio e troca de ideias sobre tecnologia</p>
             </div>
             <div class="contato-grid">
-                <a href="mailto:d04652403@gmail.com" class="contato-card">
-                    <div class="contato-icon"></div>
+                <a href="mailto:d04652403@gmail.com" class="contato-card glass-interactive">
+                    <div class="contato-icon" aria-hidden="true">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="3"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    </div>
                     <h3>E-mail</h3>
                     <p>d04652403@gmail.com</p>
+                    <span class="contato-balloon-cta">Enviar mensagem ↗</span>
                 </a>
-                <a href="https://github.com/danxy777-dev" target="_blank" rel="noopener" class="contato-card">
-                    <div class="contato-icon"></div>
+                <a href="https://github.com/danxy777-dev" target="_blank" rel="noopener" class="contato-card glass-interactive">
+                    <div class="contato-icon" aria-hidden="true">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    </div>
                     <h3>GitHub</h3>
                     <p>https://github.com/danxy777-dev</p>
+                    <span class="contato-balloon-cta">Explorar repositórios ↗</span>
                 </a>
-                <a href="https://www.linkedin.com/in/danilo-de-andrade-b83ab042a/" target="_blank" rel="noopener" class="contato-card">
-                    <div class="contato-icon"></div>
+                <a href="https://www.linkedin.com/in/danilo-de-andrade-b83ab042a/" target="_blank" rel="noopener" class="contato-card glass-interactive">
+                    <div class="contato-icon" aria-hidden="true">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    </div>
                     <h3>LinkedIn</h3>
                     <p>https://www.linkedin.com/in/danilo-de-andrade-b83ab042a/</p>
+                    <span class="contato-balloon-cta">Conectar no LinkedIn ↗</span>
                 </a>
             </div>
         </div>
@@ -412,7 +577,7 @@
     <!-- Rodapé -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-content glass-footer-dock">
                 <div class="footer-brand">
                     <span class="logo-mark logo-mark-small">DS</span>
                     <div>
@@ -420,13 +585,13 @@
                         <p class="footer-role">Estudante de Desenvolvimento de Sistemas • SENAI</p>
                     </div>
                 </div>
-                <p class="footer-copy">&copy; 2026 — Portfólio desenvolvido como parte da minha formação no SENAI.</p>
+                <p class="footer-copy">&copy; <span id="current-year">2026</span> — Portfólio desenvolvido como parte da minha formação no SENAI.</p>
             </div>
         </div>
     </footer>
 
     <!-- Botão flutuante de alternância de tema (antes do script.js para o JS encontrá-lo) -->
-    <button id="theme-toggle" class="theme-toggle" type="button"
+    <button id="theme-toggle" class="theme-toggle glass-interactive" type="button"
             aria-label="Alternar entre tema claro e escuro"
             title="Alternar tema">
         <span class="theme-icon" aria-hidden="true"></span>

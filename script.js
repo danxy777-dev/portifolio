@@ -1,31 +1,58 @@
 /* ============================================
-   Portfólio SENAI — Interatividade
+   Portfólio SENAI — Interatividade (Apple Liquid Glass)
    ============================================ */
 
-// 1) Menu mobile: abre/fecha
+// 1) Menu mobile: abre/fecha com acessibilidade e clique externo
 const menuToggle = document.getElementById('menu-toggle');
 const navList = document.querySelector('.nav-list');
+const headerEl = document.querySelector('.header');
 
-menuToggle.addEventListener('click', () => {
-    navList.classList.toggle('active');
-});
+function setMenuOpen(isOpen) {
+    if (!menuToggle || !navList) return;
+    navList.classList.toggle('active', isOpen);
+    menuToggle.classList.toggle('active', isOpen);
+    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    menuToggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+}
 
-// Fecha o menu ao clicar em um link
-document.querySelectorAll('.nav-list a').forEach(link => {
-    link.addEventListener('click', () => {
-        navList.classList.remove('active');
+if (menuToggle && navList) {
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = !navList.classList.contains('active');
+        setMenuOpen(isOpen);
     });
-});
+
+    // Fecha o menu ao clicar em um link
+    document.querySelectorAll('.nav-list a').forEach(link => {
+        link.addEventListener('click', () => {
+            setMenuOpen(false);
+        });
+    });
+
+    // Fecha ao clicar fora do menu ou pressionar Escape
+    document.addEventListener('click', (e) => {
+        if (navList.classList.contains('active') && !navList.contains(e.target) && !menuToggle.contains(e.target)) {
+            setMenuOpen(false);
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navList.classList.contains('active')) {
+            setMenuOpen(false);
+            menuToggle.focus();
+        }
+    });
+}
 
 // 2) Cursor piscando no nome do hero (após carregamento)
 window.addEventListener('load', () => {
     // O efeito de cursor piscando já é feito via CSS
 });
 
-// 3) Animação ao scrollar (fade-in nos elementos)
+// 3) Animação ao scrollar (fade-in com stagger sutil)
 const observerOptions = {
     threshold: 0.12,
-    rootMargin: '0px 0px -50px 0px'
+    rootMargin: '0px 0px -40px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -38,11 +65,39 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 document.querySelectorAll(
-    '.info-card, .skill-card, .projeto-card, .timeline-item, .contato-card, .sobre-texto'
-).forEach(el => {
+    '.info-card, .skill-card, .projeto-card, .timeline-card, .contato-card, .sobre-texto-glass'
+).forEach((el) => {
     el.classList.add('fade-in');
+    const siblingIndex = Array.from(el.parentElement ? el.parentElement.children : []).indexOf(el);
+    if (siblingIndex > 0 && siblingIndex < 8) {
+        el.style.transitionDelay = `${siblingIndex * 45}ms`;
+    }
     observer.observe(el);
 });
+
+// Helper: acopla reflexo especular dinâmico (Liquid Glass Glare) em um elemento
+const canAnimatePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
+    window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+
+function bindLiquidGlassGlare(el) {
+    if (!canAnimatePointer || !el || el.dataset.glassBound === '1') return;
+    el.dataset.glassBound = '1';
+
+    let rafId = 0;
+    el.addEventListener('pointermove', (e) => {
+        if (rafId) return;
+        rafId = requestAnimationFrame(() => {
+            const rect = el.getBoundingClientRect();
+            if (rect.width > 0 && rect.height > 0) {
+                const mx = ((e.clientX - rect.left) / rect.width) * 100;
+                const my = ((e.clientY - rect.top) / rect.height) * 100;
+                el.style.setProperty('--mx', `${mx.toFixed(1)}%`);
+                el.style.setProperty('--my', `${my.toFixed(1)}%`);
+            }
+            rafId = 0;
+        });
+    }, { passive: true });
+}
 
 /* ============================================
    Seção Certificados — Base de Dados & Renderização
@@ -164,11 +219,11 @@ const certificadosData = [
 
 // Ícones SVG reutilizáveis para os cards
 const iconesCertificados = {
-    certificado: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>`,
-    escola: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>`,
-    calendario: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>`,
-    relogio: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`,
-    linkExterno: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>`
+    certificado: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>`,
+    escola: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>`,
+    calendario: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>`,
+    relogio: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`,
+    linkExterno: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>`
 };
 
 function renderizarCertificados(categoriaSelecionada = 'Todos') {
@@ -182,9 +237,10 @@ function renderizarCertificados(categoriaSelecionada = 'Todos') {
 
     grid.innerHTML = '';
 
-    listaFiltrada.forEach(cert => {
+    listaFiltrada.forEach((cert, index) => {
         const card = document.createElement('article');
-        card.className = 'certificado-card fade-in';
+        card.className = 'certificado-card glass-interactive fade-in';
+        card.style.transitionDelay = `${Math.min(index * 40, 240)}ms`;
 
         // Cabeçalho do card: Ícone + Carga Horária Badge
         const topHtml = `
@@ -244,6 +300,7 @@ function renderizarCertificados(categoriaSelecionada = 'Todos') {
 
         grid.appendChild(card);
         observer.observe(card);
+        bindLiquidGlassGlare(card);
     });
 }
 
@@ -286,30 +343,61 @@ function inicializarFiltrosCertificados() {
 inicializarFiltrosCertificados();
 renderizarCertificados('Todos');
 
-// 4) Destacar link ativo na navegação
+// Inicializa reflexo especular (glare) e parallax sutil nos elementos Liquid Glass estáticos
+document.querySelectorAll('.glass-interactive').forEach(bindLiquidGlassGlare);
+
+(function initHeroGlassParallax() {
+    if (!canAnimatePointer) return;
+    const heroSection = document.querySelector('.hero');
+    const heroStage = document.querySelector('.hero-glass-stage');
+    if (!heroSection || !heroStage) return;
+
+    let rafId = 0;
+    heroSection.addEventListener('pointermove', (e) => {
+        if (rafId) return;
+        rafId = requestAnimationFrame(() => {
+            const rect = heroSection.getBoundingClientRect();
+            const nx = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+            const ny = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+            heroStage.style.transform = `translate3d(${(nx * 6).toFixed(2)}px, ${(ny * 5).toFixed(2)}px, 0)`;
+            rafId = 0;
+        });
+    }, { passive: true });
+
+    heroSection.addEventListener('pointerleave', () => {
+        heroStage.style.transform = 'translate3d(0, 0, 0)';
+    });
+})();
+
+// 4) Destacar link ativo na navegação + sombra sutil no cabeçalho
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-list a');
 
 function highlightActiveLink() {
-    const scrollY = window.pageYOffset + 150;
+    const scrollY = window.pageYOffset;
+
+    if (headerEl) {
+        headerEl.classList.toggle('scrolled', scrollY > 12);
+    }
+
+    const triggerOffset = scrollY + 160;
 
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.offsetHeight;
         const sectionId = section.getAttribute('id');
 
-        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        if (triggerOffset >= sectionTop && triggerOffset < sectionTop + sectionHeight) {
             navLinks.forEach(link => {
-                link.style.color = '';
-                if (link.getAttribute('href') === `#${sectionId}`) {
-                    link.style.color = 'var(--senai-red)';
-                }
+                const isMatch = link.getAttribute('href') === `#${sectionId}`;
+                link.classList.toggle('active', isMatch);
             });
         }
     });
 }
 
-window.addEventListener('scroll', highlightActiveLink);
+window.addEventListener('scroll', highlightActiveLink, { passive: true });
+highlightActiveLink();
 
 // 5) Atualizar ano do rodapé dinamicamente
 const yearSpan = document.getElementById('current-year');
@@ -317,22 +405,23 @@ if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
 }
 
-// 6) Dark Theme — alterna e persiste
+// 6) Dark Theme — alterna e persiste com ícones SVG estilo Apple (padrão: claro Apple Design)
 (function themeToggle() {
-    const STORAGE_KEY = 'portfolio-theme';
+    const STORAGE_KEY = 'portfolio-theme-apple';
     const btn = document.getElementById('theme-toggle');
     if (!btn) return;
 
-    // Resolve tema: 1) salvo, 2) preferência do sistema, 3) claro
     const saved = localStorage.getItem(STORAGE_KEY);
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initial = saved || (prefersDark ? 'dark' : 'light');
+    const initial = saved === 'dark' ? 'dark' : 'light';
 
     const icon = btn.querySelector('.theme-icon');
 
+    const moonSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
+    const sunSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
+
     function apply(theme) {
         document.body.classList.toggle('dark', theme === 'dark');
-        if (icon) icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        if (icon) icon.innerHTML = theme === 'dark' ? sunSvg : moonSvg;
         btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
         btn.setAttribute(
             'title',
@@ -359,13 +448,13 @@ if (yearSpan) {
 // 7) Console — easter egg técnico
 console.log(
     '%c🎓 Portfólio SENAI — Desenvolvimento de Sistemas',
-    'color: #DA291C; font-size: 16px; font-weight: bold;'
+    'color: #0071E3; font-size: 16px; font-weight: bold;'
 );
 console.log(
-    '%cFeito com HTML, CSS e JavaScript puro.',
-    'color: #525252; font-size: 13px;'
+    '%cFeito com HTML, CSS e JavaScript puro — Apple Design System.',
+    'color: #86868B; font-size: 13px;'
 );
 console.log(
     '%c📧 Aberto a oportunidades de estágio!',
-    'color: #DA291C; font-size: 13px; font-weight: bold;'
+    'color: #0071E3; font-size: 13px; font-weight: bold;'
 );

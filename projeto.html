@@ -7,23 +7,38 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .projeto-viewer {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background: var(--industrial-light);
+            background: transparent;
+            position: relative;
+            z-index: 1;
+        }
+
+        .viewer-header-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0.7rem 1.25rem;
         }
 
         .viewer-bar {
-            background: var(--industrial-dark);
-            color: var(--white);
-            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--glass-surface-strong);
+            backdrop-filter: var(--glass-blur-strong);
+            -webkit-backdrop-filter: var(--glass-blur-strong);
+            color: var(--text-primary, #1D1D1F);
+            padding: 0.65rem 1rem 0.65rem 0.85rem;
+            border-radius: 999px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 4px solid var(--senai-red);
+            border: 1px solid var(--glass-border-strong);
+            box-shadow: var(--glass-shadow-float);
             flex-wrap: wrap;
             gap: 1rem;
         }
@@ -31,83 +46,114 @@
         .viewer-bar-left {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.85rem;
         }
 
         .viewer-bar-left .logo-mark {
             width: 36px;
             height: 36px;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
+            border-radius: 11px;
+            text-decoration: none;
+            transition: transform 160ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1));
+        }
+
+        .viewer-bar-left .logo-mark:active {
+            transform: scale(0.95);
         }
 
         .viewer-info {
             display: flex;
             flex-direction: column;
-            line-height: 1.2;
+            line-height: 1.25;
         }
 
         .viewer-info .vi-title {
-            font-weight: 700;
+            font-weight: 600;
             font-size: 0.95rem;
+            letter-spacing: -0.012em;
+            color: var(--text-primary, #1D1D1F);
         }
 
         .viewer-info .vi-sub {
             font-size: 0.75rem;
-            color: var(--gray-300);
+            color: var(--text-secondary, #86868B);
             font-family: var(--font-code);
         }
 
         .viewer-bar-right {
             display: flex;
-            gap: 0.6rem;
+            gap: 0.55rem;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .btn-viewer {
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            padding: 0.55rem 1rem;
-            border-radius: 6px;
+            padding: 0.48rem 1rem;
+            border-radius: 980px;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 600;
-            transition: all 0.2s ease;
-            border: none;
+            letter-spacing: -0.008em;
+            transition: background 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 140ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1));
+            border: 1px solid transparent;
             cursor: pointer;
             font-family: var(--font-base);
         }
 
+        .btn-viewer:active {
+            transform: scale(0.96);
+        }
+
         .btn-viewer.primary {
-            background: var(--senai-red);
-            color: var(--white);
+            background: linear-gradient(180deg, #1E88FF 0%, var(--apple-blue, #0071E3) 100%);
+            color: #FFFFFF;
+            border-color: rgba(255, 255, 255, 0.28);
+            box-shadow:
+                0 6px 18px -4px rgba(0, 113, 227, 0.36),
+                inset 0 1px 0 rgba(255, 255, 255, 0.42);
         }
 
         .btn-viewer.primary:hover {
-            background: var(--senai-red-dark);
+            background: linear-gradient(180deg, #2B90FF 0%, var(--apple-blue-hover, #0077ED) 100%);
+            transform: translateY(-1px);
         }
 
         .btn-viewer.ghost {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--white);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: var(--glass-pill-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            color: var(--text-primary, #1D1D1F);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow-pill);
         }
 
         .btn-viewer.ghost:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: var(--glass-surface-hover);
+            color: var(--apple-blue);
+            transform: translateY(-1px);
         }
 
         .viewer-frame-wrap {
             flex: 1;
             position: relative;
-            background: var(--white);
+            margin: 0 1.25rem 1.25rem;
+            border-radius: 22px;
+            overflow: hidden;
+            background: var(--glass-surface-strong);
+            border: 1px solid var(--glass-border-strong);
+            box-shadow: var(--glass-shadow-card);
         }
 
         .viewer-frame-wrap iframe {
             width: 100%;
-            height: calc(100vh - 80px);
+            height: calc(100vh - 96px);
             border: none;
             display: block;
+            background: #FFFFFF;
         }
 
         .viewer-loading {
@@ -115,26 +161,56 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: var(--text-light);
-            font-family: var(--font-code);
-            font-size: 0.9rem;
+            color: var(--text-secondary, #86868B);
+            font-family: var(--font-base);
+            font-size: 0.92rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+
+        @media (max-width: 640px) {
+            .viewer-header-wrap {
+                padding: 0.5rem 0.75rem;
+            }
+            .viewer-bar {
+                border-radius: 22px;
+                padding: 0.65rem 0.9rem;
+            }
+            .viewer-bar-right {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .viewer-frame-wrap {
+                margin: 0 0.75rem 0.75rem;
+                border-radius: 18px;
+            }
+            .viewer-frame-wrap iframe {
+                height: calc(100vh - 140px);
+            }
         }
     </style>
 </head>
 <body>
+    <div class="ambient-canvas" aria-hidden="true">
+        <div class="ambient-orb orb-blue"></div>
+        <div class="ambient-orb orb-cyan"></div>
+        <div class="ambient-orb orb-indigo"></div>
+    </div>
     <div class="projeto-viewer">
-        <div class="viewer-bar">
-            <div class="viewer-bar-left">
-                <a href="index.html" class="logo-mark" title="Voltar ao portfólio" style="text-decoration:none; line-height: 36px; text-align:center;">DS</a>
-                <div class="viewer-info">
-                    <span class="vi-title" id="vi-title">Carregando projeto…</span>
-                    <span class="vi-sub" id="vi-sub">// portfolio.danilo</span>
+        <div class="viewer-header-wrap">
+            <div class="viewer-bar">
+                <div class="viewer-bar-left">
+                    <a href="index.html" class="logo-mark" title="Voltar ao portfólio">DS</a>
+                    <div class="viewer-info">
+                        <span class="vi-title" id="vi-title">Carregando projeto…</span>
+                        <span class="vi-sub" id="vi-sub">// portfolio.danilo</span>
+                    </div>
                 </div>
-            </div>
-            <div class="viewer-bar-right">
-                <a href="index.html#projetos" class="btn-viewer ghost">← Voltar</a>
-                <a id="vi-github" href="#" target="_blank" rel="noopener" class="btn-viewer ghost">GitHub</a>
-                <button id="vi-fullscreen" class="btn-viewer primary">Abrir em tela cheia</button>
+                <div class="viewer-bar-right">
+                    <a href="index.html#projetos" class="btn-viewer ghost">← Voltar</a>
+                    <a id="vi-github" href="#" target="_blank" rel="noopener" class="btn-viewer ghost">GitHub</a>
+                    <button id="vi-fullscreen" class="btn-viewer primary">Abrir em tela cheia</button>
+                </div>
             </div>
         </div>
         <div class="viewer-frame-wrap">
@@ -144,6 +220,16 @@
     </div>
 
     <script>
+        // Sincroniza o tema salvo do portfólio (padrão: claro Apple Design)
+        (function syncViewerTheme() {
+            try {
+                const saved = localStorage.getItem('portfolio-theme-apple');
+                if (saved === 'dark') {
+                    document.body.classList.add('dark');
+                }
+            } catch (_) {}
+        })();
+
         // Catálogo de projetos embutidos
         const PROJETOS = {
             calculadora: {
